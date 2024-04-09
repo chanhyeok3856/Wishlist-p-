@@ -37,23 +37,9 @@
        <h4 class="display-4">
         <i class="fas fa-user-tag"></i>
        </h4>
-   <c:choose>
-  <c:when test="${!empty sessionScope.userid}">
+  
     <button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='./WishlistSelect.wi'">클릭</button>  
-  </c:when>
-  <c:otherwise>
-    <button type="button" class="btn btn-outline-light btn-sm" onclick="showAlert()">클릭</button>
-  </c:otherwise>
-</c:choose>
 
-<script>
-function showAlert() {
-  alert('찜 목록이 없습니다.');
-  // 다른 동작을 추가하려면 여기에 코드를 작성하세요.
-  // 예를 들어, 다른 페이지로 이동하거나 추가 작업을 수행할 수 있습니다.
-  // location.href='./Product 페이지 등?
-}
-</script>
 
  </div>
  </div>

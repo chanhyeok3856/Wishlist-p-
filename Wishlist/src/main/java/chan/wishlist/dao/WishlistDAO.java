@@ -116,38 +116,17 @@ public class WishlistDAO implements WishlistService {
 			preparedStatement.setString(1, wishlistDTO.getProductname());
 			preparedStatement.setInt(2, wishlistDTO.getProductnum());
 			preparedStatement.setString(3, wishlistDTO.getUserid());
-		} catch (Exception e) {
-			log.info("회원 가입 실패- "+e);
-			
-		}finally {
-			try {
-				connection.close();
-				preparedStatement.close();
-			} catch (Exception e) {
-			
-				e.printStackTrace();
+			int count = preparedStatement.executeUpdate( );
+			log.info("입력 데이터 확인 - " + wishlistDTO);
+			if(count > 0) {
+				connection.commit( );
+				log.info("커밋되었습니다.");
+			} else {
+				connection.rollback( );
+				log.info("롤백되었습니다.");
 			}
-		}
-		return wishlistDTO;
-	}
-
-	@Override
-	public WishlistDTO wishlistDelete(WishlistDTO wishlistDTO) {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		try {
-			Context context = new InitialContext( );
-			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc");
-			connection = dataSource.getConnection( );
-			String sql = "delete from wishlist ";
-			sql += " where productnum = ? ";
-			log.info("SQL - " + sql);
-			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, wishlistDTO.getProductnum( ));
-		
-			
 		} catch(Exception e) {
-			log.info("회원 삭제 실패 - " + e);
+			log.info("찜 목록 등록 실패 - " + e);
 		} finally {
 			try {
 				connection.close( );
@@ -157,6 +136,40 @@ public class WishlistDAO implements WishlistService {
 			}
 		}
 		return wishlistDTO;
+	}
+
+
+	@Override
+	public boolean wishlistDelete(int num) {
+		int result = 0 ;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			Context context = new InitialContext( );
+			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc");
+			connection = dataSource.getConnection( );
+			String sql = "delete from wishlist where productnum=?";
+			
+			log.info("SQL확인 - " + sql);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, num);
+			result = preparedStatement.executeUpdate();
+			if (result == 0) {
+				return false;
+			}
+		
+			
+		} catch(Exception e) {
+			log.info("찜 목록 삭제 실패 - " + e);
+		} finally {
+			try {
+				connection.close( );
+				preparedStatement.close( );
+			} catch(Exception e) {
+				e.printStackTrace( );
+			}
+		}
+		return false;
 	}
 
 	@Override
@@ -169,7 +182,7 @@ public class WishlistDAO implements WishlistService {
 			Context context = new InitialContext( );
 			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc");
 			connection = dataSource.getConnection( );
-			String sql = "select count(*) from wishlist where userid != 'admin'";	//오류 발생 가능성 존재
+			String sql = "select count(*) from wishlist";	//오류 발생 가능성 존재
 			//count 는 열이 아니라 함수 
 			preparedStatement = connection.prepareStatement(sql);
 			resultSet = preparedStatement.executeQuery( );

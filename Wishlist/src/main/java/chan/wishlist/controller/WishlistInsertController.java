@@ -16,12 +16,13 @@ import chan.wishlist.dto.WishlistDTO;
 import chan.wishlist.hander.HandlerAdapter;
 
 
-@WebServlet("/WishlistInsertController")
+
 public class WishlistInsertController implements Controller {
 	private static final Log log = LogFactory.getLog(WishlistInsertController.class);
    
-
+@Override
 	public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse response){
+	log.info("여기까진돼?");
 		String productname = request.getParameter("productname");
 		log.info(productname);
 		int productnum = Integer.parseInt(request.getParameter("productnum"));
@@ -32,6 +33,9 @@ public class WishlistInsertController implements Controller {
 		WishlistDAO wishlistDAO = new WishlistDAO();
 		wishlistDTO.setProductname(productname);
 		wishlistDTO.setProductnum(productnum);
+		wishlistDTO.setUserid(userid);
+		wishlistDTO = wishlistDAO.wishlistInsert(wishlistDTO);
+		request.setAttribute("productname", wishlistDTO.getProductname());
 		HandlerAdapter handlerAdapter = new HandlerAdapter();
 		handlerAdapter.setPath("/WEB-INF/view/wishlist_insert_view.jsp");
 	return handlerAdapter;

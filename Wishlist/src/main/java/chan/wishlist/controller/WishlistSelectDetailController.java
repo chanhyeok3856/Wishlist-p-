@@ -1,6 +1,6 @@
 package chan.wishlist.controller;
 
-
+import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,11 +17,8 @@ import chan.wishlist.hander.HandlerAdapter;
 
 
 
-
-
-
-public class WishlistDeleteController implements Controller {
-	private static final Log log = LogFactory.getLog(WishlistDeleteController.class);
+public class WishlistSelectDetailController implements Controller {
+	private static final Log log = LogFactory.getLog(WishlistSelectDetailController.class);
 
 	@Override
 	public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
@@ -30,11 +27,11 @@ public class WishlistDeleteController implements Controller {
 		WishlistDTO wishlistDTO = new WishlistDTO( );
 		wishlistDTO.setProductname(productname);
 		WishlistDAO wishlistDAO = new WishlistDAO( );
-		wishlistDTO = wishlistDAO.wishlistDelete(wishlistDTO);
+		wishlistDTO = wishlistDAO.wishlistSelect(wishlistDTO);
 		log.info(wishlistDTO);
-		request.setAttribute("wishlistDTO", wishlistDTO);
+		request.setAttribute("WishlistDTO", wishlistDTO);
 		HandlerAdapter handlerAdapter = new HandlerAdapter( );
-		handlerAdapter.setPath("./WEB-INF/view/wishlist_delete_view.jsp");
+		handlerAdapter.setPath("/WEB-INF/view/Wishlist/Wishlist_select_detail_view.jsp");
 		return handlerAdapter;
 	}
 }

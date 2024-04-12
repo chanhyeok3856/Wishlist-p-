@@ -14,13 +14,24 @@ import chan.wishlist.dto.WishlistDTO;
 import chan.wishlist.hander.HandlerAdapter;
 
 
-public class WishlistSelectController implements Controller {
 
+public class WishlistSelectController implements Controller {
+	private static final Log log = LogFactory.getLog(WishlistSelectController.class);
 	@Override
 	public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
+		
+		WishlistDAO wishlistDAO = new WishlistDAO( );
+		ArrayList<WishlistDTO> arrayList = new ArrayList<WishlistDTO>( );
+	
+		arrayList = wishlistDAO.wishlistSelectAll();
+	
+		
+		request.setAttribute("arrayList", arrayList);
 
+	
+	
 		HandlerAdapter handlerAdapter = new HandlerAdapter( );
-		handlerAdapter.setPath("./WEB-INF/view/wishlist_select_view.jsp");
+		handlerAdapter.setPath("/WEB-INF/view/wishlist_select_view.jsp");
 		return handlerAdapter;
 	}
 }

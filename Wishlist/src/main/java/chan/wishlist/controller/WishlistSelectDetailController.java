@@ -1,4 +1,5 @@
-package chan.wishlist.controller;
+
+		package chan.wishlist.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -22,17 +23,21 @@ public class WishlistSelectDetailController implements Controller {
 
 	@Override
 	public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
-		String productname = request.getParameter("productname");
-		log.info(productname);
+		int productnum = Integer.parseInt(request.getParameter("productnum"));
+		log.info(productnum);
 		WishlistDTO wishlistDTO = new WishlistDTO( );
-		wishlistDTO.setProductname(productname);
+		wishlistDTO.setProductnum(productnum);
 		WishlistDAO wishlistDAO = new WishlistDAO( );
 		wishlistDTO = wishlistDAO.wishlistSelect(wishlistDTO);
 		log.info(wishlistDTO);
-		request.setAttribute("WishlistDTO", wishlistDTO);
+		request.setAttribute("productname", wishlistDTO.getProductname());
+		request.setAttribute("productnum", wishlistDTO.getProductnum());
+		request.setAttribute("userid", wishlistDTO.getUserid());
 		HandlerAdapter handlerAdapter = new HandlerAdapter( );
-		handlerAdapter.setPath("/WEB-INF/view/Wishlist/Wishlist_select_detail_view.jsp");
+		handlerAdapter.setPath("/WEB-INF/view/wishlist_select_detail_view.jsp");
 		return handlerAdapter;
 	}
-}
 
+
+
+	}

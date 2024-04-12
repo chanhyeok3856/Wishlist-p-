@@ -15,6 +15,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import chan.wishlist.control.Controller;
+import chan.wishlist.controller.WishlistDeleteAllController;
 import chan.wishlist.controller.WishlistDeleteController;
 import chan.wishlist.controller.WishlistInsertController;
 import chan.wishlist.controller.WishlistSelectController;
@@ -68,13 +69,19 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 			handlerAdapter.setPath("/WEB-INF/view/wishlist_insert.jsp");
 			log.info("찜 목록 등록 뷰 확인 - " + handlerAdapter);
 		
-		
+	}else if(pathURI.equals("/WishlistDeleteView.wi")) {
+		handlerAdapter = new HandlerAdapter( );
+		handlerAdapter.setPath("/WEB-INF/view/wishlist_delete.jsp");
+		log.info("찜 목록 삭제 뷰 확인 - " + handlerAdapter);
+	}else if(pathURI.equals("/WishlistDeleteAll.wi")) {
+		controller = new WishlistDeleteAllController( );
+			handlerAdapter = controller.execute(request, response);
 			
-		
+			log.info("찜 목록 삭제 뷰 확인 - " + handlerAdapter);
 	
+}
 	
-		
-	}if (handlerAdapter != null) {
+	if (handlerAdapter != null) {
 		if (handlerAdapter.isRedirect()) {
 			response.sendRedirect(handlerAdapter.getPath());
 		

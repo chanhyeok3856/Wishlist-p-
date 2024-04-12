@@ -36,6 +36,8 @@ public class WishlistInsertController implements Controller {
 		wishlistDTO.setUserid(userid);
 		wishlistDTO = wishlistDAO.wishlistInsert(wishlistDTO);
 		request.setAttribute("productname", wishlistDTO.getProductname());
+		request.setAttribute("productnum", wishlistDTO.getProductnum());
+		request.setAttribute("userid", wishlistDTO.getUserid());
 		HandlerAdapter handlerAdapter = new HandlerAdapter();
 		handlerAdapter.setPath("/WEB-INF/view/wishlist_insert_view.jsp");
 	return handlerAdapter;

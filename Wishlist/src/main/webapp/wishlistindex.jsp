@@ -27,8 +27,8 @@
    <div class="row"></div>
   </div>
  </section>
- <section id="posts">
-  <div class="container">
+	 <section id="posts">
+	  <div class="container">
    <div class="row justify-content-center">
     <div class="col-md-3">
      <div class="card text-center bg-primary text-white mb-3">
@@ -37,8 +37,13 @@
        <h4 class="display-4">
         <i class="fas fa-user-tag"></i>
        </h4>
-  
-    <button type="button" class="btn btn-outline-light btn-sm" onclick="location.href='./WishlistSelect.wi'">클릭</button>  
+     <button type="button" class="btn btn-outline-info mr-sm-1" onclick="location.href='./WishlistSelect.wi'">
+      찜 목록 보기
+      <button type="button" class="btn btn-outline-info mr-sm-1" onclick="location.href='./WishlistInsertView.wi'">
+      찜 목록 등록
+    <button type="button" class="btn btn-outline-info mr-sm-1" onclick="location.href='./WishlistDeleteView.wi'">
+    찜 목록 삭제
+   
 
 
  </div>

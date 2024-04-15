@@ -15,7 +15,7 @@ ${wishlistDTO}
     <p>상품 번호: ${productnum}</p>
     <p>유저 아이디: ${userid}</p>
 
-<button onclick="goToIndexPage()">홈으로 돌아가기</button>
+<button onclick="goToIndexPage()">돌아가기</button>
 <script type="text/javascript">
     function goToIndexPage() {
         location.href = "./wishlistindex.jsp";

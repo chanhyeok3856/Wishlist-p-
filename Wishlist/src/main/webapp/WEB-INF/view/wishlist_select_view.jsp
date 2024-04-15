@@ -22,7 +22,7 @@
 
 <c:forEach var="wishlistDTO" items="${arrayList}">
     <p>상품 번호: ${wishlistDTO.productnum}</p>
-    <button type="button" onclick="selectDetail('${wishlistDTO.productnum}')">상세조회하기</button>
+    <button type="button" onclick="selectDetail('${wishlistDTO.productnum}')">상세보기</button>
     <button type="button" onclick="deleteDetail('${wishlistDTO.productnum}')">삭제하기</button>
 </c:forEach>
 

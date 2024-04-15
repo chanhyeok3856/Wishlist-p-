@@ -23,11 +23,15 @@
 <c:forEach var="wishlistDTO" items="${arrayList}">
     <p>상품 번호: ${wishlistDTO.productnum}</p>
     <button type="button" onclick="selectDetail('${wishlistDTO.productnum}')">상세조회하기</button>
+    <button type="button" onclick="deleteDetail('${wishlistDTO.productnum}')">삭제하기</button>
 </c:forEach>
 
 <c:if test="${empty arrayList}">
     <tr>
-        <td colspan="4">찜 목록이 없습니다.</td>
+        <script type="text/javascript">
+			alert("상품이 존재하지 않습니다.")
+			location.href="./wishlistindex.jsp"
+		</script>
     </tr>
 </c:if>
 
@@ -35,6 +39,10 @@
     function selectDetail(productnum) {
     
         window.location.href = "./WishlistSelectDetail.wi?productnum=" + productnum;
+    }
+    function deleteDetail(productnum) {
+        
+        window.location.href = "./WishlistDelete.wi?productnum=" + productnum;
     }
 </script>
 

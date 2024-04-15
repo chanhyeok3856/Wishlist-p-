@@ -38,7 +38,7 @@
         <i class="fas fa-user-tag"></i>
        </h4>
      <button type="button" class="btn btn-outline-info mr-sm-1" onclick="location.href='./WishlistSelect.wi'">
-      찜 목록 보기
+     찜 목록 보기
       <button type="button" class="btn btn-outline-info mr-sm-1" onclick="location.href='./WishlistInsertView.wi'">
       찜 목록 등록
     <button type="button" class="btn btn-outline-info mr-sm-1" onclick="location.href='./WishlistDeleteView.wi'">

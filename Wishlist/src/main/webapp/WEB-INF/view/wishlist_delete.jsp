@@ -10,17 +10,17 @@
 <form action="./WishlistDelete.wi" method="post" id="deleteForm" enctype="application/x-www-form-urlencoded"> 
   <div class="form-group row">
           
-            <label for="productnum" class="col-4 col-form-label pr-0">
+           <p> <label for="productnum" class="col-4 col-form-label pr-0">
              <i class="fas fa-user-plus mr-sm-1"></i>
-             삭제할 상품번호 입력
-            </label>
+            <h2>삭제할 상품번호 입력</h2> 
+            </label></p>
             <div class="col-8 pl-0">
              <input type="text" name="productnum" id="productnum" class="form-control">
             </div>
            </div>
            
-   <button type="submit"> 개별 삭제 </button>
-  <button type="button" onclick="deleteAll()"> 전체 삭제 </button>
+   <p><button type="submit"> 개별 삭제 </button></p>
+  <p><button type="button" onclick="deleteAll()"> 전체 삭제 </button></p>
 
 
 

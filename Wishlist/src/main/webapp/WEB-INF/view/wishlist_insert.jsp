@@ -23,29 +23,29 @@
 <body>
 <form action="./WishlistInsert.wi" method="post" id="insertForm" class="" enctype="application/x-www-form-urlencoded"> 
   <div class="form-group row">
-            <label for="productname" class="col-4 col-form-label pr-0">
-             <i class="fas fa-user-plus mr-sm-1"></i>
-            상품명 등록
+            <label for="productname" class="col-2 col-form-label pr-0">
+             
+            <h4>상품명 등록</h4>
             </label>
-            <div class="col-8 pl-0">
+            <div class="col-4 pl-0">
              <input type="text" name="productname" id="productname" class="form-control">
             </div>
            </div>
              <div class="form-group row">
-            <label for="productnum" class="col-4 col-form-label pr-0">
-             <i class="fas fa-user-plus mr-sm-1"></i>
-             상품번호 등록
+            <label for="productnum" class="col-2 col-form-label pr-0">
+             
+             <h4>상품번호 등록</h4>
             </label>
-            <div class="col-8 pl-0">
+            <div class="col-4 pl-0">
              <input type="text" name="productnum" id="productnum" class="form-control">
             </div>
            </div>
              <div class="form-group row">
-            <label for="userid" class="col-4 col-form-label pr-0">
-             <i class="fas fa-user-plus mr-sm-1"></i>
-            유저 아이디 등록
+            <label for="userid" class="col-2 col-form-label pr-0">
+             
+            <h4>유저 아이디 등록</h4>
             </label>
-            <div class="col-8 pl-0">
+            <div class="col-4 pl-0">
              <input type="text" name="userid" id="userid" class="form-control">
             </div>
            </div>

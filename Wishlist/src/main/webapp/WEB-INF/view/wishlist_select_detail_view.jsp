@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>찜 목록 상세 조회</title>
+<title> 상세 조회</title>
 </head>
 <body>
 ${wishlistDTO}

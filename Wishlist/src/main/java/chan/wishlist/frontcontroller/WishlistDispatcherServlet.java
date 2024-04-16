@@ -20,6 +20,8 @@ import chan.wishlist.controller.WishlistDeleteController;
 import chan.wishlist.controller.WishlistInsertController;
 import chan.wishlist.controller.WishlistSelectController;
 import chan.wishlist.controller.WishlistSelectDetailController;
+import chan.wishlist.dao.WishlistDAO;
+import chan.wishlist.dto.WishlistDTO;
 import chan.wishlist.hander.HandlerAdapter;
 
 
@@ -45,7 +47,7 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 	String requestURI = request.getRequestURI();
 	String contextPath = request.getContextPath();
 	String pathURI = requestURI.substring(contextPath.length());
-	HandlerAdapter handlerAdapter = null;
+	HandlerAdapter handlerAdapter = new HandlerAdapter();
 	Controller controller = null;
 	if (pathURI.equals("/WishlistSelect.wi")) {
 		controller = new WishlistSelectController();
@@ -55,10 +57,38 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 		controller = new WishlistInsertController( );
 		handlerAdapter = controller.execute(request, response);
 		log.info("찜 목록 등록 확인 - " + handlerAdapter);
-	}else if(pathURI.equals("/WishlistDelete.wi")) {
-			controller = new WishlistDeleteController( );
-			handlerAdapter = controller.execute(request, response);
-			log.info("찜 목록 삭제 확인 - " + handlerAdapter);
+	}else if (pathURI.equals("/WishlistDelete.wi")) {
+	    String productnumStr = request.getParameter("productnum");
+	    if (productnumStr != null && !productnumStr.isEmpty()) {
+	        int productnum = Integer.parseInt(productnumStr);
+	        WishlistDTO wishlistDTO = new WishlistDTO();
+	        wishlistDTO.setProductnum(productnum);
+	        
+	        WishlistDAO wishlistDAO = new WishlistDAO();
+	        boolean isDeleted = wishlistDAO.wishlistDelete(wishlistDTO);
+	        
+	        if (handlerAdapter != null) {
+	            if (isDeleted) {
+	                handlerAdapter.setPath("/WEB-INF/view/wishlist_delete_success.jsp");
+	            } else {
+	                handlerAdapter.setPath("/WEB-INF/view/wishlist_delete_fail.jsp");
+	            }
+	        } else {
+	            // handlerAdapter가 null일 때의 처리
+	            // 예를 들어, 에러 페이지로 리다이렉트 또는 에러 메시지를 출력할 수 있습니다.
+	        System.out.println("handleradapter가 null입니다");
+	        }
+	    } else {
+	        if (handlerAdapter != null) {
+	            handlerAdapter.setPath("/WEB-INF/view/wishlist_delete_fail.jsp");
+	        } else {
+	            // handlerAdapter가 null일 때의 처리
+	            // 예를 들어, 에러 페이지로 리다이렉트 또는 에러 메시지를 출력할 수 있습니다.
+	            response.sendRedirect("/wishlistindex.jsp");
+	        }
+	    }
+	
+	
 	}else if(pathURI.equals("/WishlistSelectDetail.wi")) {
 		controller = new WishlistSelectDetailController( );
 		handlerAdapter = controller.execute(request, response);

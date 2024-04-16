@@ -2,6 +2,7 @@ package chan.wishlist.dao;
 
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -154,37 +155,38 @@ public class WishlistDAO implements WishlistService {
 
 
 	@Override
-	public WishlistDTO wishlistDelete(WishlistDTO wishlistDTO) {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		try {
-			Context context = new InitialContext( );
-			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc");
-			connection = dataSource.getConnection( );
-			String sql = "delete from wishlist ";
-			sql += " where productnum = ? ";
-			log.info("SQL - " + sql);
-			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, wishlistDTO.getProductnum( ));
-			int count = preparedStatement.executeUpdate( );
-			if(count > 0) {
-				connection.commit( );
-				log.info("커밋되었습니다.");
-			} else {
-				connection.rollback( );
-				log.info("롤백되었습니다.");
-			}
-		} catch(Exception e) {
-			log.info("찜 목록 삭제 실패 - " + e);
-		} finally {
-			try {
-				connection.close( );
-				preparedStatement.close( );
-			} catch(Exception e) {
-				e.printStackTrace( );
-			}
-		}
-		return wishlistDTO;
+	public boolean wishlistDelete(WishlistDTO wishlistDTO) {
+	    Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    boolean isDeleted = false;
+
+	    try {
+	        Class.forName("oracle.jdbc.OracleDriver");
+	        conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "scott", "tiger");
+	        
+	        String sql = "DELETE FROM wishlist WHERE productnum = ?";
+	        pstmt = conn.prepareStatement(sql);
+	        pstmt.setInt(1, wishlistDTO.getProductnum());
+
+	        int result = pstmt.executeUpdate();
+
+	        if (result > 0) {
+	            isDeleted = true;
+	        }
+
+	    } catch (ClassNotFoundException e) {
+	        e.printStackTrace();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (pstmt != null) pstmt.close();
+	            if (conn != null) conn.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    return isDeleted;
 	}
 	@Override
 	public WishlistDTO wishlistDeleteAll(WishlistDTO wishlistDTO) {

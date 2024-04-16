@@ -22,9 +22,10 @@
 </head>
 <body>
 <form action="./WishlistInsert.wi" method="post" id="insertForm" class="" enctype="application/x-www-form-urlencoded"> 
+<p></p>
   <div class="form-group row">
             <label for="productname" class="col-2 col-form-label pr-0">
-             
+            
             <h4>상품명 등록</h4>
             </label>
             <div class="col-4 pl-0">
@@ -33,7 +34,7 @@
            </div>
              <div class="form-group row">
             <label for="productnum" class="col-2 col-form-label pr-0">
-             
+            
              <h4>상품번호 등록</h4>
             </label>
             <div class="col-4 pl-0">

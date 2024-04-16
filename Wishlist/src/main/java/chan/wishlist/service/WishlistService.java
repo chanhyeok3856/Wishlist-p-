@@ -12,7 +12,7 @@ public interface WishlistService {
 	
 	
 	
-	public WishlistDTO wishlistDelete(WishlistDTO wishlistDTO);
+	public boolean wishlistDelete(WishlistDTO wishlistDTO);
 
 	ArrayList<WishlistDTO> wishlistSelectAll();
 	WishlistDTO wishlistDeleteAll(WishlistDTO wishlistDTO);

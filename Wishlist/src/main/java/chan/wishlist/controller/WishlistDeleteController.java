@@ -26,7 +26,7 @@ public class WishlistDeleteController implements Controller {
       WishlistDTO wishlistDTO = new WishlistDTO();
       wishlistDTO.setProductnum(productnum);
       WishlistDAO wishlistDAO = new WishlistDAO();
-      wishlistDTO = wishlistDAO.wishlistDelete(wishlistDTO);
+      boolean isDeleted = wishlistDAO.wishlistDelete(wishlistDTO);
       log.info(wishlistDTO);
       request.setAttribute("wishlistDTO", wishlistDTO);
       HandlerAdapter handlerAdapter = new HandlerAdapter();

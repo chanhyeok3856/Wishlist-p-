@@ -56,7 +56,7 @@ public class WishlistDAO implements WishlistService {
 			log.info("전체 찜 목록 조회실패 - " + e);
 		} finally {
 			try {
-				resultSet.close( );
+
 				preparedStatement.close( );
 				connection.close( );
 			} catch(Exception e) {

@@ -106,7 +106,6 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 	}else if(pathURI.equals("/WishlistDeleteAll.wi")) {
 		controller = new WishlistDeleteAllController( );
 			handlerAdapter = controller.execute(request, response);
-			
 			log.info("찜 목록 삭제 뷰 확인 - " + handlerAdapter);
 	
 }

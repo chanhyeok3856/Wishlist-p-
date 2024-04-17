@@ -156,19 +156,19 @@ public class WishlistDAO implements WishlistService {
 
 	@Override
 	public boolean wishlistDelete(WishlistDTO wishlistDTO) {
-	    Connection conn = null;
-	    PreparedStatement pstmt = null;
+	    Connection connection = null;
+	    PreparedStatement preparedStatement = null;
 	    boolean isDeleted = false;
 
 	    try {
 	        Class.forName("oracle.jdbc.OracleDriver");
-	        conn = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "scott", "tiger");
+	        connection = DriverManager.getConnection("jdbc:oracle:thin:@127.0.0.1:1521:xe", "scott", "tiger");
 	        
 	        String sql = "DELETE FROM wishlist WHERE productnum = ?";
-	        pstmt = conn.prepareStatement(sql);
-	        pstmt.setInt(1, wishlistDTO.getProductnum());
+	        preparedStatement = connection.prepareStatement(sql);
+	        preparedStatement.setInt(1, wishlistDTO.getProductnum());
 
-	        int result = pstmt.executeUpdate();
+	        int result = preparedStatement.executeUpdate();
 
 	        if (result > 0) {
 	            isDeleted = true;
@@ -180,8 +180,8 @@ public class WishlistDAO implements WishlistService {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (pstmt != null) pstmt.close();
-	            if (conn != null) conn.close();
+	            if (preparedStatement != null) preparedStatement.close();
+	            if (connection != null) connection.close();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -190,36 +190,41 @@ public class WishlistDAO implements WishlistService {
 	}
 	@Override
 	public WishlistDTO wishlistDeleteAll(WishlistDTO wishlistDTO) {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-		try {
-			Context context = new InitialContext( );
-			DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc");
-			connection = dataSource.getConnection( );
-			String sql = "delete from wishlist ";
-		
-			log.info("SQL - " + sql);
-			preparedStatement = connection.prepareStatement(sql);
-			
-			int count = preparedStatement.executeUpdate( );
-			if(count > 0) {
-				connection.commit( );
-				log.info("커밋되었습니다.");
-			} else {
-				connection.rollback( );
-				log.info("롤백되었습니다.");
-			}
-		} catch(Exception e) {
-			log.info("찜 목록 전체 삭제 실패 - " + e);
-		} finally {
-			try {
-				connection.close( );
-				preparedStatement.close( );
-			} catch(Exception e) {
-				e.printStackTrace( );
-			}
-		}
-		return wishlistDTO;
+	    Connection connection = null;
+	    PreparedStatement preparedStatement = null;
+	    try {
+	        Context context = new InitialContext();
+	        DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc");
+	        connection = dataSource.getConnection();
+	        String sql = "delete from wishlist";
+	        
+	        log.info("SQL - " + sql);
+	        preparedStatement = connection.prepareStatement(sql);
+	        
+	        int count = preparedStatement.executeUpdate();
+	        if(count > 0) {
+	            log.info(count + "개의 상품이 삭제되었습니다.");
+	            wishlistDTO.setProductnum(count);
+	        } else {
+	          log.info("삭제할 상품이 없습니다.");
+	          wishlistDTO.setProductnum(0);
+	        }
+	    } catch(Exception e) {
+	        log.info("찜 목록 전체 삭제 실패 - " + e);
+	    } finally {
+	        try {
+	            if(preparedStatement != null) {
+	                preparedStatement.close();
+	            }
+	            if(connection != null) {
+	                connection.close();
+	            }
+	        } catch(Exception ex) {
+	            log.error("자원 해제 중 에러 발생 - " + ex);
+	        }
+	    }
+	    return wishlistDTO;
 	}
+
 
 }

@@ -1,6 +1,8 @@
 package chan.wishlist.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,19 +21,23 @@ public class WishlistDeleteAllController implements Controller {
     private static final Log log = LogFactory.getLog(WishlistDeleteAllController.class);
     
 
-	  @Override
-	    public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
-	        log.info("WishlistDeleteAllController 실행");
-
-	     
-	     
-	      WishlistDTO wishlistDTO = new WishlistDTO();	     
-	      WishlistDAO wishlistDAO = new WishlistDAO();
-	      wishlistDTO = wishlistDAO.wishlistDeleteAll(wishlistDTO);
-	      log.info(wishlistDTO);
-	      request.setAttribute("wishlistDTO", wishlistDTO);
-	      HandlerAdapter handlerAdapter = new HandlerAdapter();
-	      handlerAdapter.setPath("/WEB-INF/view/wishlist_delete_view.jsp");
-	      return handlerAdapter;
-	    }
-	}
+    @Override
+    public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
+        log.info("WishlistDeleteAllController 실행");
+        WishlistDTO wishlistDTO = new WishlistDTO();     
+        WishlistDAO wishlistDAO = new WishlistDAO();
+        wishlistDTO = wishlistDAO.wishlistDeleteAll(wishlistDTO);
+        try {
+            PrintWriter out = response.getWriter();
+            if (wishlistDTO.getProductnum() == 0) {
+                out.print("{\"exists\": false}");
+            } else {
+                out.print("{\"exists\": true}");
+            }
+            out.flush();
+        } catch (IOException e) {
+            log.error("응답 데이터 작성 실패", e);
+        }
+        return null; // HandlerAdapter를 반환하지 않는다.
+    }
+}

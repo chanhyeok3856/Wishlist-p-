@@ -43,9 +43,6 @@
       찜 목록 등록
     <button type="button" class="btn btn-outline-info mr-sm-1" onclick="location.href='./WishlistDeleteView.wi'">
     찜 목록 삭제
-   
-
-
  </div>
  </div>
  </div>

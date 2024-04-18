@@ -207,5 +207,48 @@ public WishlistDTO wishlistSelect(WishlistDTO wishlistDTO) {
 	        }
 	        return wishlistDTO;
 	    }
+	 @Override
+	 public WishlistDTO wishlistDeleteAll(WishlistDTO wishlistDTO) {
+		 Connection connection = null;
+		 PreparedStatement preparedStatement = null;
+		 try {
+		 Context context = new InitialContext();
+		 DataSource dataSource = (DataSource) context.lookup("java:comp/env/jdbc");
+		 connection = dataSource.getConnection();
+		 connection.setAutoCommit(false);
+		 String sql = "delete from wishlist";
+		 log.info("SQL - " +sql);
+		 preparedStatement = connection.prepareStatement(sql);
+		 int count = preparedStatement.executeUpdate();
+		 if (count>0) {
+				connection.commit();
+				log.info("커밋되었습니다.");
+			}else {
+				connection.rollback();
+				log.info("롤백되었습니다.");
+			}
+		} catch (Exception e) {
+	        try {
+	            if (connection != null) {
+	                connection.rollback();
+	            }
+	        } catch (SQLException se) {
+	            se.printStackTrace();
+	        }
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (connection != null) {
+	                connection.setAutoCommit(true); // 자동 커밋 활성화
+	                connection.close();
+	            }
+	            if (preparedStatement != null) {
+	                preparedStatement.close();
+	            }
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    return wishlistDTO;
 }
-
+}

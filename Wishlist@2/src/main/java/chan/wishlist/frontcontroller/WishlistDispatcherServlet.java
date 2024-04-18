@@ -13,6 +13,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import chan.wishlist.control.Controller;
+import chan.wishlist.controller.WishlistDeleteAllController;
 import chan.wishlist.controller.WishlistDeleteController;
 import chan.wishlist.controller.WishlistInsertController;
 import chan.wishlist.controller.WishlistSelectController;
@@ -59,6 +60,10 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 	}else if(pathURI.equals("/WishlistInsertView.wi")) {
 		handlerAdapter = new HandlerAdapter();
 		handlerAdapter.setPath("/WEB-INF/view/wishlist_insert.jsp");
+	}else if(pathURI.equals("/WishlistDeleteAll.wi")) {
+		controller = new WishlistDeleteAllController();
+		handlerAdapter = controller.execute(request, response);
+		log.info("찜 목록 전체 삭제 확인 - "+handlerAdapter);
 	}
 	if (handlerAdapter!= null) {
 		if (handlerAdapter.isRedirect()) {

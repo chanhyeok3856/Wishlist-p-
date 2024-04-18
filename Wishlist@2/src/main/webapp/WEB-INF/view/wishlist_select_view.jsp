@@ -31,7 +31,7 @@
                 <th>상품 번호</th>
                 <th>회원 번호</th>
                 <th>찜 목록 추가일</th>
-                <th>비고</th>
+                <th>비고<button type="button" onclick = "deleteAll()">전체삭제</button></th>
             </tr>
         </thead>
         <tbody>
@@ -64,6 +64,9 @@ function selectDetail(wishlist_number) {
 }
 function deleteDetail(wishlist_number) {
 	window.location.href = "./WishlistDelete.wi?wishlist_number=" + wishlist_number;
+}
+function deleteAll(){
+	window.location.href = "./WishlistDeleteAll.wi";
 }
 </script>
 </body>

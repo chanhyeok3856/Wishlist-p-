@@ -7,4 +7,5 @@ import chan.wishlist.dto.WishlistDTO;
 public interface WishlistService {
 ArrayList<WishlistDTO> wishlistSelectAll();
 public WishlistDTO wishlistSelect(WishlistDTO wishlistDTO);
+WishlistDTO wishlistDelete(WishlistDTO wishlistDTO);
 }

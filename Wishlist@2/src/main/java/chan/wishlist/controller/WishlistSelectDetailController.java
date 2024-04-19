@@ -29,7 +29,7 @@ public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse re
 	request.setAttribute("wishlist_create", wishlistDTO.getWishlist_create());
 	
 	HandlerAdapter handlerAdapter = new HandlerAdapter();
-	handlerAdapter.setPath("/WEB-INF/view/wishlist_select_detail_view.jsp");
+	handlerAdapter.setPath("/WEB-INF/view/wishlist/wishlist_select_detail_view.jsp");
 	return handlerAdapter;
 }
 }

@@ -1,10 +1,5 @@
+package chan.wishlist.controller;
 
-		package chan.wishlist.controller;
-
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,28 +11,25 @@ import chan.wishlist.dao.WishlistDAO;
 import chan.wishlist.dto.WishlistDTO;
 import chan.wishlist.hander.HandlerAdapter;
 
-
-
-public class WishlistSelectDetailController implements Controller {
-	private static final Log log = LogFactory.getLog(WishlistSelectDetailController.class);
-
-	@Override
-	public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
-		int productnum = Integer.parseInt(request.getParameter("productnum"));
-		log.info(productnum);
-		WishlistDTO wishlistDTO = new WishlistDTO( );
-		wishlistDTO.setProductnum(productnum);
-		WishlistDAO wishlistDAO = new WishlistDAO( );
-		wishlistDTO = wishlistDAO.wishlistSelect(wishlistDTO);
-		log.info(wishlistDTO);
-		request.setAttribute("productname", wishlistDTO.getProductname());
-		request.setAttribute("productnum", wishlistDTO.getProductnum());
-		request.setAttribute("userid", wishlistDTO.getUserid());
-		HandlerAdapter handlerAdapter = new HandlerAdapter( );
-		handlerAdapter.setPath("/WEB-INF/view/wishlist_select_detail_view.jsp");
-		return handlerAdapter;
-	}
-
-
-
-	}
+public class WishlistSelectDetailController implements Controller{
+private static final Log log = LogFactory.getLog(WishlistSelectDetailController.class);
+@Override
+public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
+	int wishlist_number = Integer.parseInt(request.getParameter("wishlist_number"));
+	log.info(wishlist_number);
+	WishlistDTO wishlistDTO = new WishlistDTO();
+	wishlistDTO.setWishlist_number(wishlist_number);
+	WishlistDAO wishlistDAO = new WishlistDAO();
+	wishlistDTO = wishlistDAO.wishlistSelect(wishlistDTO);
+	log.info(wishlistDTO);
+	request.setAttribute("wishlist_number", wishlistDTO.getWishlist_number());
+	request.setAttribute("product_title", wishlistDTO.getProduct_title());
+	request.setAttribute("product_number", wishlistDTO.getProduct_number());
+	request.setAttribute("member_number", wishlistDTO.getMember_number());
+	request.setAttribute("wishlist_create", wishlistDTO.getWishlist_create());
+	
+	HandlerAdapter handlerAdapter = new HandlerAdapter();
+	handlerAdapter.setPath("/WEB-INF/view/wishlist/wishlist_select_detail_view.jsp");
+	return handlerAdapter;
+}
+}

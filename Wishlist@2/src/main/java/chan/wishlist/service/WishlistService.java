@@ -9,5 +9,6 @@ ArrayList<WishlistDTO> wishlistSelectAll();
 public WishlistDTO wishlistSelect(WishlistDTO wishlistDTO);
 WishlistDTO wishlistDelete(WishlistDTO wishlistDTO);
 WishlistDTO wishlistInsert(WishlistDTO wishlistDTO);
+
 WishlistDTO wishlistDeleteAll(WishlistDTO wishlistDTO);
 }

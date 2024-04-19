@@ -7,8 +7,8 @@
 <title>찜 목록</title>
 </head>
 <body>
-<%
-    response.sendRedirect("./WishlistSelect.wi");
-%>
+ <script type = "text/javascript">
+    location.href="./WishlistSelect.wi"
+    </script>
 </body>
 </html>

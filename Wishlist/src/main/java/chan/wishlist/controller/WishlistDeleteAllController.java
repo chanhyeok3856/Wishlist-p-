@@ -29,7 +29,7 @@ public class WishlistDeleteAllController implements Controller {
         wishlistDTO = wishlistDAO.wishlistDeleteAll(wishlistDTO);
         try {
             PrintWriter out = response.getWriter();
-            if (wishlistDTO.getProductnum() == 0) {
+            if (wishlistDTO.getProduct_title() != null) {
                 out.print("{\"exists\": false}");
             } else {
                 out.print("{\"exists\": true}");
@@ -38,6 +38,6 @@ public class WishlistDeleteAllController implements Controller {
         } catch (IOException e) {
             log.error("응답 데이터 작성 실패", e);
         }
-        return null; // HandlerAdapter를 반환하지 않는다.
+        return null;
     }
 }

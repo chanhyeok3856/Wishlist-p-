@@ -59,7 +59,7 @@ protected void service(HttpServletRequest request, HttpServletResponse response)
 		log.info("찜 목록 추가 확인 - " + handlerAdapter);
 	}else if(pathURI.equals("/WishlistInsertView.wi")) {
 		handlerAdapter = new HandlerAdapter();
-		handlerAdapter.setPath("/WEB-INF/view/wishlist_insert.jsp");
+		handlerAdapter.setPath("/WEB-INF/view/wishlist/wishlist_insert.jsp");
 	}else if(pathURI.equals("/WishlistDeleteAll.wi")) {
 		controller = new WishlistDeleteAllController();
 		handlerAdapter = controller.execute(request, response);

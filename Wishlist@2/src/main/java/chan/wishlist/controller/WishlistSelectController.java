@@ -24,7 +24,7 @@ ArrayList<WishlistDTO> arrayList = new ArrayList<WishlistDTO>();
 arrayList = wishlistDAO.wishlistSelectAll();
 request.setAttribute("arrayList", arrayList);
 HandlerAdapter handlerAdapter = new HandlerAdapter();
-handlerAdapter.setPath("/WEB-INF/view/wishlist_select_view.jsp");
+handlerAdapter.setPath("/WEB-INF/view/wishlist/wishlist_select_view.jsp");
 return handlerAdapter;
 }
 }

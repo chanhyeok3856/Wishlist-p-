@@ -30,7 +30,7 @@ wishlistDTO.setMember_number(member_number);
 log.info(wishlistDTO);
 wishlistDTO = wishlistDAO.wishlistInsert(wishlistDTO);
 HandlerAdapter handlerAdapter = new HandlerAdapter();
-handlerAdapter.setPath("/WEB-INF/view/wishlist_insert.jsp");
+handlerAdapter.setPath("./wishlistindex.jsp");
 return handlerAdapter;
 }
 }

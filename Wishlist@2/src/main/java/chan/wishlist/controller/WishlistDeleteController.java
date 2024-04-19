@@ -26,7 +26,7 @@ public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse re
 	log.info(wishlistDTO);
 	request.setAttribute("wishlistDTO", wishlistDTO);
 	HandlerAdapter handlerAdapter = new HandlerAdapter();
-	handlerAdapter.setPath("/WEB-INF/view/wishlist_delete_view.jsp");
+	handlerAdapter.setPath("/WEB-INF/view/wishlist/wishlist_delete_view.jsp");
 	return handlerAdapter;
 }
 

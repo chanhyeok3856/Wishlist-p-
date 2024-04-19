@@ -6,6 +6,5 @@ import javax.servlet.http.HttpServletResponse;
 import chan.wishlist.hander.HandlerAdapter;
 
 public interface Controller {
-	public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse response);
-	}
-
+public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse response);
+}

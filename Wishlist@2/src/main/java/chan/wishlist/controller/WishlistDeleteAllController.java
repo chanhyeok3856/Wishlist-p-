@@ -1,5 +1,11 @@
 package chan.wishlist.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -12,25 +18,26 @@ import chan.wishlist.dto.WishlistDTO;
 import chan.wishlist.hander.HandlerAdapter;
 
 public class WishlistDeleteAllController implements Controller {
-    private static Log log = LogFactory.getLog(WishlistDeleteAllController.class);
+    private static final Log log = LogFactory.getLog(WishlistDeleteAllController.class);
+    
 
     @Override
     public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
         log.info("WishlistDeleteAllController 실행");
-        
+        WishlistDTO wishlistDTO = new WishlistDTO();     
         WishlistDAO wishlistDAO = new WishlistDAO();
-        WishlistDTO wishlistDTO = wishlistDAO.wishlistDeleteAll(new WishlistDTO());
-        // DTO 값이 있는지 확인
-        if (wishlistDTO != null) {
-            request.setAttribute("wishlistDTO", wishlistDTO);
-            HandlerAdapter handlerAdapter = new HandlerAdapter();
-            handlerAdapter.setPath("/WEB-INF/view/wishlist_delete_all.jsp");
-            return handlerAdapter;
-        } else {
-            // DTO 값이 없으면 실패 JSP로 이동
-            HandlerAdapter handlerAdapter = new HandlerAdapter();
-            handlerAdapter.setPath("/WEB-INF/view/wishlist_delete_fail.jsp");
-            return handlerAdapter;
+        wishlistDTO = wishlistDAO.wishlistDeleteAll(wishlistDTO);
+        try {
+            PrintWriter out = response.getWriter();
+            if (wishlistDTO.getProduct_title() != null) {
+                out.print("{\"exists\": false}");
+            } else {
+                out.print("{\"exists\": true}");
+            }
+            out.flush();
+        } catch (IOException e) {
+            log.error("응답 데이터 작성 실패", e);
         }
+        return null;
     }
 }

@@ -12,17 +12,25 @@ import chan.wishlist.dto.WishlistDTO;
 import chan.wishlist.hander.HandlerAdapter;
 
 public class WishlistDeleteAllController implements Controller {
-private static Log log = LogFactory.getLog(WishlistDeleteAllController.class);
+    private static Log log = LogFactory.getLog(WishlistDeleteAllController.class);
 
-@Override
-public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
-	log.info("WishlistDeleteAllController 실행");
-	WishlistDTO wishlistDTO = new WishlistDTO();
-	WishlistDAO wishlistDAO = new WishlistDAO();
-	wishlistDTO = wishlistDAO.wishlistDeleteAll(wishlistDTO);
-	request.setAttribute("wishlistDTO", wishlistDTO);
-	HandlerAdapter handlerAdapter = new HandlerAdapter();
-	handlerAdapter.setPath("/WEB-INF/view/wishlist_delete_all.jsp");
-	return handlerAdapter;
-}
+    @Override
+    public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
+        log.info("WishlistDeleteAllController 실행");
+        
+        WishlistDAO wishlistDAO = new WishlistDAO();
+        WishlistDTO wishlistDTO = wishlistDAO.wishlistDeleteAll(new WishlistDTO());
+        // DTO 값이 있는지 확인
+        if (wishlistDTO != null) {
+            request.setAttribute("wishlistDTO", wishlistDTO);
+            HandlerAdapter handlerAdapter = new HandlerAdapter();
+            handlerAdapter.setPath("/WEB-INF/view/wishlist_delete_all.jsp");
+            return handlerAdapter;
+        } else {
+            // DTO 값이 없으면 실패 JSP로 이동
+            HandlerAdapter handlerAdapter = new HandlerAdapter();
+            handlerAdapter.setPath("/WEB-INF/view/wishlist_delete_fail.jsp");
+            return handlerAdapter;
+        }
+    }
 }

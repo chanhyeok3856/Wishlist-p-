@@ -40,5 +40,26 @@
             <button type="submit">추가하기</button>      
         </div>
     </form>
+    <script type="text/javascript">
+     $("#wishlistForm").submit(function(event) {
+        event.preventDefault();
+
+        if ($("#wishlistForm").valid()) {
+            $.ajax({
+                url: $(this).attr("action"),
+                type: "POST",
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (confirm("추가가 완료되었습니다. 찜 목록으로 이동하시겠습니까?")) {
+                        window.location.href = "./wishlistindex.jsp";
+                    }
+                },
+                error: function() {
+                    alert("오류가 발생하였습니다. 다시 시도해주세요.");
+                }
+            });
+        }
+    });
+</script>
 </body>
 </html>

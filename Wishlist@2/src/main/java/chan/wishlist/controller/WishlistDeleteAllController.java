@@ -23,21 +23,16 @@ public class WishlistDeleteAllController implements Controller {
 
     @Override
     public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse response) {
-        log.info("WishlistDeleteAllController 실행");
-        WishlistDTO wishlistDTO = new WishlistDTO();     
-        WishlistDAO wishlistDAO = new WishlistDAO();
-        wishlistDTO = wishlistDAO.wishlistDeleteAll(wishlistDTO);
-        try {
-            PrintWriter out = response.getWriter();
-            if (wishlistDTO.getProduct_title() != null) {
-                out.print("{\"exists\": false}");
-            } else {
-                out.print("{\"exists\": true}");
-            }
-            out.flush();
-        } catch (IOException e) {
-            log.error("응답 데이터 작성 실패", e);
-        }
-        return null;
+    	log.info("WishlistDeleteAllController 실행");
+    	
+
+    	WishlistDTO wishlistDTO = new WishlistDTO();
+    	WishlistDAO wishlistDAO = new WishlistDAO();
+    	wishlistDTO = wishlistDAO.wishlistDeleteAll(wishlistDTO);
+    	log.info(wishlistDTO);
+    	request.setAttribute("wishlistDTO", wishlistDTO);
+    	HandlerAdapter handlerAdapter = new HandlerAdapter();
+    	handlerAdapter.setPath("/WEB-INF/view/wishlist/wishlist_delete_all.jsp");
+    	return handlerAdapter;
     }
 }

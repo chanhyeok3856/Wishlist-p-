@@ -22,12 +22,6 @@ public HandlerAdapter execute(HttpServletRequest request, HttpServletResponse re
 	WishlistDAO wishlistDAO = new WishlistDAO();
 	wishlistDTO = wishlistDAO.wishlistSelect(wishlistDTO);
 	log.info(wishlistDTO);
-	request.setAttribute("wishlist_number", wishlistDTO.getWishlist_number());
-	request.setAttribute("product_title", wishlistDTO.getProduct_title());
-	request.setAttribute("product_number", wishlistDTO.getProduct_number());
-	request.setAttribute("member_number", wishlistDTO.getMember_number());
-	request.setAttribute("wishlist_create", wishlistDTO.getWishlist_create());
-	
 	HandlerAdapter handlerAdapter = new HandlerAdapter();
 	handlerAdapter.setPath("/WEB-INF/view/wishlist/wishlist_select_detail_view.jsp");
 	return handlerAdapter;

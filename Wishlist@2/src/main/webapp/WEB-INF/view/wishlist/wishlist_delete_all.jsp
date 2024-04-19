@@ -8,12 +8,10 @@
 <title>전체삭제</title>
 </head>
 <body>
- <c:if test="${empty arrayList}">
     <tr>
     <script type = "text/javascript">
-    alert("삭제할 상품이 없습니다.")
+    alert("삭제가 완료되었습니다.")
     location.href="./wishlistindex.jsp"
     </script>
-    </c:if>
 </body>
 </html>

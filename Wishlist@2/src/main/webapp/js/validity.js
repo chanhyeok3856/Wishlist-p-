@@ -6,6 +6,9 @@ $(function() {
         showErrors: function(errorMap, errorList) {
             if (this.numberOfInvalids()) {
                 alert(errorList[0].message);
+                 alert(errorList[1].message);
+                  alert(errorList[2].message);
+                  
             }
         }
     });
@@ -50,24 +53,5 @@ $(function() {
         }
     });
 
-    $("#wishlistForm").submit(function(event) {
-        event.preventDefault(); // 폼 제출 방지
-
-        if ($("#wishlistForm").valid()) { // 유효성 검사
-            // 여기에 AJAX 제출 코드 추가
-            $.ajax({
-                url: $(this).attr("action"),
-                type: "POST",
-                data: $(this).serialize(),
-                success: function(response) {
-                    if (confirm("추가가 완료되었습니다. 찜 목록으로 이동하시겠습니까?")) {
-                        window.location.href = "./wishlistindex.jsp";
-                    }
-                },
-                error: function() {
-                    alert("오류가 발생하였습니다. 다시 시도해주세요.");
-                }
-            });
-        }
-    });
+   
 });

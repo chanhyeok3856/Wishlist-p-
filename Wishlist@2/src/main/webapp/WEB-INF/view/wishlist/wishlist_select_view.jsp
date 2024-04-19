@@ -66,25 +66,7 @@ function deleteDetail(wishlist_number) {
 }
 function deleteAll() {
     if (confirm("정말로 전체 삭제하시겠습니까?")) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "./WishlistDeleteAll.wi", true);
-       
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4) {
-                if (xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    if (response.exists) {
-                        alert("전체 삭제가 완료되었습니다.");
-                    } else {
-                        alert("삭제할 상품이 없습니다.");
-                    }
-                    window.location.href = "./wishlistindex.jsp";
-                } else {
-                    alert("전체 삭제에 실패하였습니다.");
-                }
-            }
-        };
-        xhr.send();
+    	window.location.href = "./WishlistDeleteAll.wi";
     }
 }
 </script>

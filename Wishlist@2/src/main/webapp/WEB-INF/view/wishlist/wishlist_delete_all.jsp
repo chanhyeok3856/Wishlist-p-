@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>전체삭제</title>
+<title>전체삭제123</title>
 </head>
 <body>
     <tr>
